@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./server/utils/connectDB.js";
 import { errorHandler, notFound } from "./server/utils/errorHandler.js";
 import TourRouter from "./server/Routes/tourRoutes.js";
+import ReviewRouter from "./server/Routes/reviewRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/tours", TourRouter);
+app.use("/api/v1/review", ReviewRouter);
 
 app.use(notFound);
 app.use(errorHandler);
