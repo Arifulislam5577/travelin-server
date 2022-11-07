@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { connectDB } from "./utils/connectDB.js";
+import { connectDB } from "./server/utils/connectDB.js";
+import { errorHandler, notFound } from "./server/utils/errorHandler.js";
+import TourRouter from "./server/Routes/tourRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -15,6 +17,11 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Welcome");
 });
+
+app.use("/api/v1/tours", TourRouter);
+
+app.use(notFound);
+app.use(errorHandler);
 
 // DATABASE CONNECTION
 connectDB();
