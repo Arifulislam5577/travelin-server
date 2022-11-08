@@ -17,13 +17,12 @@ app.use(express.json());
 // ROUTES
 
 app.get("/", (req, res) => {
-  res.send("Welcome");
+  res.send("<h1>Welcome to Travelin server</h1>");
 });
 
 app.use("/api/v1/tours", TourRouter);
 app.use("/api/v1/review", ReviewRouter);
 app.use("/api/v1/user", UserRouter);
-
 app.use(notFound);
 app.use(errorHandler);
 

@@ -14,7 +14,7 @@ export const getTours = asyncHandler(async (req, res) => {
 
 export const getTourById = asyncHandler(async (req, res) => {
   const tour = await TourModel.findById(req.params.id);
-  const tourReview = await ReviewModel.find({ tourId: req.params.id }).sort({
+  const tourReview = await ReviewModel.find({ tour: req.params.id }).sort({
     createdAt: -1,
   });
   if (!tour) {
