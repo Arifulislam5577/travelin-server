@@ -4,10 +4,15 @@ const { Schema, model } = mongoose;
 
 const reviewSchema = new Schema(
   {
-    tourId: {
-      type: mongoose.Schema.Types.ObjectId,
+    tour: {
+      type: mongoose.Types.ObjectId,
       required: true,
-      ref: "TourModel",
+      ref: "tour",
+    },
+    userId: {
+      type: String,
+      required: [true, "Must have user id"],
+      unique: true,
     },
     userName: { type: String, required: [true, "Must have userName"] },
     rating: { type: Number, default: 0 },
