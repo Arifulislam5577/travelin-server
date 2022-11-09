@@ -9,7 +9,9 @@ import { uplaodImg } from "../utils/uploadImg.js";
 
 export const getTours = asyncHandler(async (req, res) => {
   const limtiData = req.query.limit;
-  const tours = await TourModel.find().limit(limtiData);
+  const tours = await TourModel.find().limit(limtiData).sort({
+    createdAt: -1,
+  });
 
   if (tours.length < 0) {
     res.status(500);
@@ -40,14 +42,13 @@ export const getTourById = asyncHandler(async (req, res) => {
 
 export const createTour = asyncHandler(async (req, res) => {
   const { name, price, rating, description, image } = req.body;
-  const imgUrl = await uplaodImg(image);
 
   const newTour = new TourModel({
     name,
     price,
     rating,
     description,
-    image: imgUrl,
+    image,
   });
 
   const tour = await newTour.save();
