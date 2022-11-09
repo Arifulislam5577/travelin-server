@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import ReviewModel from "../model/ReviewModel.js";
 import TourModel from "../model/TourModel.js";
+import uploadToCloud from "uploadimgtocloud";
 
 // PATH   --> /api/v1/tours
 // METHOD --> GET
@@ -38,7 +39,27 @@ export const getTourById = asyncHandler(async (req, res) => {
 
 export const createTour = asyncHandler(async (req, res) => {
   const { name, price, rating, description, image } = req.body;
-  const newTour = new TourModel({ name, price, rating, description, image });
+
+  //IMAGE UPLOAD FUNCTIONALITY HERE
+
+  const imgUrl = await uploadToCloud({
+    cloudName: process.env.CLOUDE_NAME,
+    apiKey: process.env.API_KEY,
+    apiSecret: process.env.SECRET_KEY,
+    folderName: "TRAVELIN",
+    height: 1920,
+    width: 1080,
+    image: image, // Image should be base64 bit
+  });
+
+  const newTour = new TourModel({
+    name,
+    price,
+    rating,
+    description,
+    image: imgUrl,
+  });
+
   const tour = await newTour.save();
   if (!tour) {
     res.status(500);
