@@ -8,7 +8,8 @@ import uploadToCloud from "uploadimgtocloud";
 // ROUTE  --> PUBLIC
 
 export const getTours = asyncHandler(async (req, res) => {
-  const tours = await TourModel.find().limit(3);
+  const limtiData = req.query.limit;
+  const tours = await TourModel.find().limit(limtiData);
 
   if (tours.length < 0) {
     res.status(500);
