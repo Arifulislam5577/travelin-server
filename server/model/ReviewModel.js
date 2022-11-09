@@ -15,7 +15,7 @@ const reviewSchema = new Schema(
       unique: true,
     },
     userName: { type: String, required: [true, "Must have userName"] },
-    rating: { type: Number, default: 0 },
+    rating: { type: Number, default: 5 },
     reviewText: {
       type: String,
       required: [true, "Must have review reviewText"],

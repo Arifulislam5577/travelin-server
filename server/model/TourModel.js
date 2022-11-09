@@ -6,7 +6,7 @@ const tourSchema = new Schema(
   {
     name: { type: String, required: [true, "Must have tour name"] },
     price: { type: Number, required: [true, "Must have tour price"] },
-    rating: { type: Number, required: [true, "Must have tour rating"] },
+    rating: { type: Number, default: 5 },
     description: {
       type: String,
       required: [true, "Must have tour description"],

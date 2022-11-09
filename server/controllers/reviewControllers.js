@@ -34,3 +34,32 @@ export const getUserReview = asyncHandler(async (req, res) => {
   }
   res.status(200).json(userReview);
 });
+
+// PATH   --> /api/v1/review/:id
+// METHOD --> GET
+// ROUTE  --> PRIVATE
+
+export const getReviewById = asyncHandler(async (req, res) => {
+  const review = await ReviewModel.findById(req.params.id);
+  if (!review) {
+    res.status(400);
+    throw new Error("No Review found");
+  }
+  res.status(200).json(review);
+});
+
+// PATH   --> /api/v1/review/:id
+// METHOD --> PATCH
+// ROUTE  --> PRIVATE
+
+export const updateReview = asyncHandler(async (req, res) => {
+  const review = await ReviewModel.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  if (!review) {
+    res.status(400);
+    throw new Error("No Review found");
+  }
+  res.status(200).json(review);
+});
