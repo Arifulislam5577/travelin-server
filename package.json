@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
+    "build": "node index.js",
     "importData": "node server/utils/seederData.js"
   },
   "keywords": [],

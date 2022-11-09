@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { connectDB } from "./server/utils/connectDB.js";
 import { errorHandler, notFound } from "./server/utils/errorHandler.js";
+import { v2 as cloudinary } from "cloudinary";
 import TourRouter from "./server/Routes/tourRoutes.js";
 import ReviewRouter from "./server/Routes/reviewRoutes.js";
 import UserRouter from "./server/Routes/userRoutes.js";
@@ -14,6 +15,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDE_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.SECRET_KEY,
+});
 
 // ROUTES
 
