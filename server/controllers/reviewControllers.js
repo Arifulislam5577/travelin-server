@@ -63,3 +63,16 @@ export const updateReview = asyncHandler(async (req, res) => {
   }
   res.status(200).json(review);
 });
+
+// PATH   --> /api/v1/review/:id
+// METHOD --> DELETE
+// ROUTE  --> PRIVATE
+
+export const deleteReviewById = asyncHandler(async (req, res) => {
+  const review = await ReviewModel.findByIdAndDelete(req.params.id);
+  if (!review) {
+    res.status(400);
+    throw new Error("No Review found");
+  }
+  res.status(200).json({ success: true });
+});

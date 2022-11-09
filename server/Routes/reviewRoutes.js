@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createReview,
+  deleteReviewById,
   getReviewById,
   getUserReview,
   updateReview,
@@ -13,6 +14,7 @@ ReviewRouter.route("/")
   .get(verifyUser, getUserReview);
 ReviewRouter.route("/:id")
   .get(verifyUser, getReviewById)
-  .patch(verifyUser, updateReview);
+  .patch(verifyUser, updateReview)
+  .delete(verifyUser, deleteReviewById);
 
 export default ReviewRouter;
