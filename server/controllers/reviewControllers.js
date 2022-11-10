@@ -6,18 +6,20 @@ import asyncHandler from "express-async-handler";
 // ROUTE  --> PRIVATE
 export const createReview = asyncHandler(async (req, res) => {
   const { tour, userName, reviewText, UserImg, userId } = req.body;
-  const newReview = new ReviewModel({
-    tour,
-    userId,
-    userName,
-    reviewText,
-    UserImg,
-  });
-  const review = await newReview.save();
-  if (!review) {
-    throw new Error("Internal Server Error");
+
+  try {
+    const newReview = await ReviewModel.create({
+      tour,
+      userId,
+      userName,
+      reviewText,
+      UserImg,
+    });
+
+    res.status(201).json(newReview);
+  } catch (error) {
+    throw new Error(error.message);
   }
-  res.status(201).json(review);
 });
 
 // PATH   --> /api/v1/review
