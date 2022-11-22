@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import ReviewModel from "../model/ReviewModel.js";
 import TourModel from "../model/TourModel.js";
+import { uplaodImg } from "../utils/uploadImg.js";
 
 // PATH   --> /api/v1/tours
 // METHOD --> GET
@@ -46,12 +47,16 @@ export const getTourById = asyncHandler(async (req, res) => {
 
 export const createTour = asyncHandler(async (req, res) => {
   const { name, price, rating, description, image } = req.body;
+
+  console.log(req.body);
+
+  const imgUrl = await uplaodImg(image);
   const newTour = new TourModel({
     name,
-    price,
+    price: price * 1,
     rating,
     description,
-    image,
+    image: imgUrl,
   });
 
   const tour = await newTour.save();
