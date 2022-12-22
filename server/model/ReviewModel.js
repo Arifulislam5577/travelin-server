@@ -9,8 +9,10 @@ const reviewSchema = new Schema(
       required: true,
       ref: "tour",
     },
-    userId: {
-      type: String,
+    user: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "user",
     },
     userName: { type: String, required: [true, "Must have userName"] },
     rating: { type: Number, default: 5 },

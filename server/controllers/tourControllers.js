@@ -9,19 +9,25 @@ import { uplaodImg } from "../utils/uploadImg.js";
 
 export const getTours = asyncHandler(async (req, res) => {
   const limtiData = req.query.limit * 1;
+  let query = {};
   const page = req.query.page * 1;
   const totalService = await TourModel.countDocuments();
-  const tours = await TourModel.find()
+
+  if (req.query.userId) {
+    query = { user: req.query.userId };
+  }
+  const tours = await TourModel.find(query)
     .skip((page - 1) * limtiData)
     .limit(limtiData)
     .sort({
       createdAt: -1,
-    });
+    })
+    .populate("user");
 
   if (tours.length < 0) {
-    res.status(500);
-    throw new Error("Tours Not Found");
+    return res.status(500).json({ message: "No tour found" });
   }
+
   res.status(200).json({ totalService, tours });
 });
 
@@ -46,12 +52,10 @@ export const getTourById = asyncHandler(async (req, res) => {
 // ROUTE  --> PRIVATE
 
 export const createTour = asyncHandler(async (req, res) => {
-  const { name, price, rating, description, image } = req.body;
-
-  console.log(req.body);
-
+  const { name, price, rating, description, image, user } = req.body;
   const imgUrl = await uplaodImg(image);
   const newTour = new TourModel({
+    user,
     name,
     price: price * 1,
     rating,

@@ -1,5 +1,6 @@
 export const tourData = [
   {
+    user: "63a43bbede941964e221ef66",
     name: "The Sea Explorer",
     price: 299,
     rating: 4.7,
@@ -9,6 +10,7 @@ export const tourData = [
       "https://res.cloudinary.com/arif5577/image/upload/v1667972122/TRAVELIN/tour-2-1_sa4w2w.jpg",
   },
   {
+    user: "63a43bbede941964e221ef66",
     name: "The Forest Hiker",
     price: 199,
     rating: 4.5,
@@ -18,6 +20,7 @@ export const tourData = [
       "https://res.cloudinary.com/arif5577/image/upload/v1667972124/TRAVELIN/tour-1-3_iskphe.jpg",
   },
   {
+    user: "63a43bbede941964e221ef66",
     name: "The Snow Adventurer",
     price: 399,
     rating: 4.2,
@@ -27,6 +30,7 @@ export const tourData = [
       "https://res.cloudinary.com/arif5577/image/upload/v1667972121/TRAVELIN/tour-9-cover_wwko4h.jpg",
   },
   {
+    user: "63a43bbede941964e221ef66",
     name: "The Park Camper",
     price: 599,
     rating: 4.8,
@@ -36,6 +40,7 @@ export const tourData = [
       "https://res.cloudinary.com/arif5577/image/upload/v1667972118/TRAVELIN/tour-8-2_trd0xp.jpg",
   },
   {
+    user: "63a43bbede941964e221ef66",
     name: "The City Wanderer",
     price: 99,
     rating: 4,
@@ -45,6 +50,7 @@ export const tourData = [
       "https://res.cloudinary.com/arif5577/image/upload/v1667972110/TRAVELIN/tour-4-1_hcdqs9.jpg",
   },
   {
+    user: "63a43bbede941964e221ef66",
     name: "The Sports Lover",
     price: 599,
     rating: 4.6,
@@ -52,5 +58,15 @@ export const tourData = [
       "Generally, people do not travel always with the same purpose. Some people travel to gain knowledge, some go to healthy places to improve their health and some people travel for pleasure only. Businessmen travel for business purposes.Travelling has manifold benefits. It is a part and parcel of our education. Our education and bookish knowledge remain imperfect without traveling. We may read about many places in our history books. If we can visit these places, the study of history becomes interesting. We read about men and things from different parts of the world. By traveling to different parts of the world, we see new people and new things. We can learn much about the manners and customs of those people. In this way, we can gain much knowledge. Consequently, our narrowness of mind disappears. Many people travel to different places to improve their health. If they go to a healthy place, they can recover their lost health.",
     image:
       "https://res.cloudinary.com/arif5577/image/upload/v1667972109/TRAVELIN/tour-3-1_aid0xj.jpg",
+  },
+  {
+    user: "63a4374fdfcac22d64adbada",
+    name: "The Sundorban Hiker",
+    price: 299,
+    rating: 4.7,
+    description:
+      "Generally, people do not travel always with the same purpose. Some people travel to gain knowledge, some go to healthy places to improve their health and some people travel for pleasure only. Businessmen travel for business purposes.Travelling has manifold benefits. It is a part and parcel of our education. Our education and bookish knowledge remain imperfect without traveling. We may read about many places in our history books. If we can visit these places, the study of history becomes interesting. We read about men and things from different parts of the world. By traveling to different parts of the world, we see new people and new things. We can learn much about the manners and customs of those people. In this way, we can gain much knowledge. Consequently, our narrowness of mind disappears. Many people travel to different places to improve their health. If they go to a healthy place, they can recover their lost health.",
+    image:
+      "https://res.cloudinary.com/arif5577/image/upload/v1668087769/TRAVELIN/xkrkky4enugbct1jbng4.jpg",
   },
 ];

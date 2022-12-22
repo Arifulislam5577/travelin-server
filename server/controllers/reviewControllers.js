@@ -5,11 +5,12 @@ import asyncHandler from "express-async-handler";
 // METHOD --> POST
 // ROUTE  --> PRIVATE
 export const createReview = asyncHandler(async (req, res) => {
-  const { tour, userName, reviewText, UserImg, userId } = req.body;
+  const { tour, user, userName, reviewText, UserImg, userId } = req.body;
 
   try {
     const newReview = await ReviewModel.create({
       tour,
+      user,
       userId,
       userName,
       reviewText,
@@ -28,8 +29,8 @@ export const createReview = asyncHandler(async (req, res) => {
 
 export const getUserReview = asyncHandler(async (req, res) => {
   const userReview = await ReviewModel.find({
-    userId: req.query.userId,
-  }).populate("tour");
+    user: req.query.userId,
+  }).populate("tour user");
 
   if (userReview.length < 0) {
     return res.status(200).json({ message: "No Review" });
