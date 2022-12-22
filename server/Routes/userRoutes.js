@@ -1,7 +1,8 @@
 import express from "express";
-import { generateJwtToken } from "../controllers/userControllers.js";
+import { generateJwtToken, auth } from "../controllers/userControllers.js";
+import { verifyUser } from "../middleware/verifyUser.js";
 const UserRouter = express.Router();
 
-UserRouter.route("/").post(generateJwtToken);
+UserRouter.route("/").post(verifyUser, auth);
 
 export default UserRouter;

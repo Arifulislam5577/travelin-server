@@ -1,15 +1,16 @@
 import asyncHandler from "express-async-handler";
-import jwt from "jsonwebtoken";
+import admin from "../config/firebase.config.js";
 
 export const verifyUser = asyncHandler(async (req, res, next) => {
   let token;
+
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
     try {
       token = req.headers.authorization.split(" ")[1];
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = await admin.auth().verifyIdToken(token);
       req.user = decoded;
       next();
     } catch (error) {
