@@ -7,7 +7,6 @@ const orderSchema = new Schema(
     tour: { type: mongoose.Types.ObjectId, required: true, ref: "tour" },
     user: { type: mongoose.Types.ObjectId, required: true, ref: "user" },
     paid: { type: Boolean, default: false },
-    customer: { type: Object },
     amount: { type: Number, required: true },
   },
   { timestamps: true }

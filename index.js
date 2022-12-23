@@ -9,6 +9,7 @@ import TourRouter from "./server/Routes/tourRoutes.js";
 import ReviewRouter from "./server/Routes/reviewRoutes.js";
 import UserRouter from "./server/Routes/userRoutes.js";
 import PaymentRouter from "./server/Routes/paymentRoutes.js";
+import OrderRouter from "./server/Routes/orderRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -50,7 +51,9 @@ app.get("/", (req, res) => {
 app.use("/api/v1/tours", TourRouter);
 app.use("/api/v1/review", ReviewRouter);
 app.use("/api/v1/user", UserRouter);
+app.use("/api/v1/order", OrderRouter);
 app.use("/api/v1/payment", PaymentRouter);
+
 app.use(notFound);
 app.use(errorHandler);
 
