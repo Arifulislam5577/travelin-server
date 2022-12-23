@@ -68,8 +68,8 @@ export const createPaymentIntent = asyncHandler(async (req, res) => {
     ],
     customer: customer.id,
     mode: "payment",
-    success_url: `http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: "http://localhost:3000/dddd",
+    success_url: `${process.env.CLIENT_SIDE}/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.CLIENT_SIDE}/dashboard`,
   });
 
   res.status(200).json({ url: session.url });

@@ -17,7 +17,11 @@ const app = express();
 // MIDDLEWARE
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://checkout.stripe.com"],
+    origin: [
+      "http://localhost:3000",
+      "https://checkout.stripe.com",
+      "https://travelin-327a3.web.app",
+    ],
   })
 );
 
