@@ -1,8 +1,12 @@
 import express from "express";
-import { createPaymentIntent } from "../controllers/paymentControllers.js";
+import {
+  createPaymentIntent,
+  paymentWebhook,
+} from "../controllers/paymentControllers.js";
 import { verifyUser } from "../middleware/verifyUser.js";
-const UserRouter = express.Router();
+const paymentRouer = express.Router();
 
-UserRouter.route("/").post(verifyUser, createPaymentIntent);
+paymentRouer.route("/").post(verifyUser, createPaymentIntent);
+paymentRouer.route("/webhook").post(paymentWebhook);
 
-export default UserRouter;
+export default paymentRouer;
