@@ -100,6 +100,8 @@ export const paymentWebhook = asyncHandler(async (request, response) => {
       const orderTour = JSON.parse(customer?.metadata?.tour);
       const order = await orderModel.findById(orderTour?.orderId);
 
+      console.log({ order });
+
       if (order) {
         order.paid = true;
         await order.save();

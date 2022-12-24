@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import admin from "../config/firebase.config.js";
+import firebaseApp from "../config/config.js";
 
 export const verifyUser = asyncHandler(async (req, res, next) => {
   let token;
@@ -10,7 +10,7 @@ export const verifyUser = asyncHandler(async (req, res, next) => {
   ) {
     try {
       token = req.headers.authorization.split(" ")[1];
-      const decoded = await admin.auth().verifyIdToken(token);
+      const decoded = await firebaseApp.auth().verifyIdToken(token);
       req.user = decoded;
       next();
     } catch (error) {
