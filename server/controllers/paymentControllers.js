@@ -6,7 +6,7 @@ import asyncHandler from "express-async-handler";
 import userModel from "../model/UserModel.js";
 import TourModel from "../model/TourModel.js";
 import orderModel from "../model/OrderModel.js";
-
+import { buffer } from "micro";
 export const createPaymentIntent = asyncHandler(async (req, res) => {
   const { orderId, user } = req.body;
   const findOrder = await orderModel.findOne({ _id: orderId });
@@ -78,9 +78,10 @@ export const createPaymentIntent = asyncHandler(async (req, res) => {
 export const paymentWebhook = asyncHandler(async (request, response) => {
   const sig = request.headers["stripe-signature"];
   let event;
+  const requestBuffer = await buffer(request);
   try {
     event = stripe.webhooks.constructEvent(
-      request.rawBody,
+      requestBuffer.toString(),
       sig,
       process.env.WEBHOOKSECRET
     );
@@ -99,20 +100,14 @@ export const paymentWebhook = asyncHandler(async (request, response) => {
       const customer = await stripe.customers.retrieve(data?.customer);
       const orderTour = JSON.parse(customer?.metadata?.tour);
       const order = await orderModel.findById(orderTour?.orderId);
-
-      console.log({ order });
-
       if (order) {
         order.paid = true;
         await order.save();
       }
       break;
-
     default:
       console.log(`Unhandled event type ${event.type}`);
   }
-
-  // Return a response to acknowledge receipt of the event
   response.json({ received: true });
 });
 

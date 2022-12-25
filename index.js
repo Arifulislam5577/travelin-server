@@ -25,15 +25,20 @@ app.use(
   })
 );
 
-app.post(
-  "/api/v1/payment/webhook",
+// app.post(
+//   "/api/v1/payment/webhook",
+//   express.json({
+//     verify: (req, res, buf) => {
+//       req.rawBody = buf.toString();
+//     },
+//   })
+// );
+
+app.use(
   express.json({
-    verify: (req, res, buf) => {
-      req.rawBody = buf.toString();
-    },
+    limit: "50mb",
   })
 );
-app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 if (process.env.NODE_ENV === "DEVELOPMENT") {
