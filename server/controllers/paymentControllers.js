@@ -6,10 +6,15 @@ import asyncHandler from "express-async-handler";
 import orderModel from "../model/OrderModel.js";
 
 export const createPaymentIntent = asyncHandler(async (req, res) => {
-  const { order, user } = req.body;
-  const amount = parseFloat(order.amount) * 100;
+  const { orderId, user } = req.body;
+
+  const findOrder = await orderModel.findById(orderId).populate("tour");
+
+  if (!findOrder) return res.status(404).json({ message: "Order not found" });
+
+  const amount = parseFloat(findOrder.amount) * 100;
   const tour = {
-    orderId: order._id,
+    orderId: findOrder._id,
   };
 
   const customer = await stripe.customers.create({
@@ -39,7 +44,7 @@ export const createPaymentIntent = asyncHandler(async (req, res) => {
         price_data: {
           currency: "usd",
           product_data: {
-            name: order?.tour?.name,
+            name: findOrder?.tour?.name,
           },
           unit_amount: amount,
         },
@@ -48,7 +53,7 @@ export const createPaymentIntent = asyncHandler(async (req, res) => {
     ],
     customer: customer.id,
     mode: "payment",
-    success_url: `${process.env.CLIENT_SIDE}/success?orderId=${order._id}`,
+    success_url: `${process.env.CLIENT_SIDE}/success?orderId=${findOrder._id}`,
     cancel_url: `${process.env.CLIENT_SIDE}/dashboard`,
   });
 

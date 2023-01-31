@@ -25,15 +25,6 @@ app.use(
   })
 );
 
-// app.post(
-//   "/api/v1/payment/webhook",
-//   express.json({
-//     verify: (req, res, buf) => {
-//       req.rawBody = buf.toString();
-//     },
-//   })
-// );
-
 app.use(
   express.json({
     limit: "50mb",
