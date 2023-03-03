@@ -7,8 +7,10 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
+    "client": "cd ../travelin-client && npm start",
     "build": "node index.js",
-    "importData": "node server/utils/seederData.js"
+    "importData": "node server/utils/seederData.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",

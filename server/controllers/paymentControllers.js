@@ -7,7 +7,6 @@ import orderModel from "../model/OrderModel.js";
 
 export const createPaymentIntent = asyncHandler(async (req, res) => {
   const { orderId, user } = req.body;
-
   const findOrder = await orderModel.findById(orderId).populate("tour");
 
   if (!findOrder) return res.status(404).json({ message: "Order not found" });
@@ -101,8 +100,8 @@ export const paymentWebhook = asyncHandler(async (request, response) => {
 });
 
 export const updatePaymentStatus = asyncHandler(async (req, res) => {
-  const { orderId } = req.query;
-  const findOrder = await orderModel.findById(orderId);
+  const { sessionToken } = req.query;
+  const findOrder = await orderModel.findById(sessionToken);
   if (findOrder) {
     findOrder.paid = true;
     await findOrder.save();
